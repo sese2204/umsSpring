@@ -32,3 +32,5 @@ public class StoreRepositoryImpl implements StoreRepositoryCustom{
                 .fetch();
     }
 }
+
+

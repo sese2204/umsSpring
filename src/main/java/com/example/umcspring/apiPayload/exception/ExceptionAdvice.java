@@ -24,6 +24,8 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 @Slf4j
 @RestControllerAdvice(annotations = {RestController.class})
 public class ExceptionAdvice extends ResponseEntityExceptionHandler {
+
+    // @Valid 검증 실패 시 발생하는 예외 처리
     @ExceptionHandler
     public ResponseEntity<Object> validation(
             ConstraintViolationException e, WebRequest request
@@ -44,6 +46,7 @@ public class ExceptionAdvice extends ResponseEntityExceptionHandler {
             WebRequest request
     ) {
 
+        // @RequestBody 등의 검증 실패 처리
         Map<String, String> errors = new LinkedHashMap<>();
 
         e.getBindingResult().getFieldErrors().stream()
@@ -58,11 +61,13 @@ public class ExceptionAdvice extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler
     public ResponseEntity<Object> exception(Exception e, WebRequest request) {
+        // 위의 핸들러들에서 처리되지 않은 예외를 처리
         e.printStackTrace();
 
         return handleExceptionInternalFalse(e, ErrorStatus._INTERNAL_SERVER_ERROR, HttpHeaders.EMPTY, ErrorStatus._INTERNAL_SERVER_ERROR.getHttpStatus(),request, e.getMessage());
     }
 
+    //커스텀 예외 처리
     @ExceptionHandler(value = GeneralException.class)
     public ResponseEntity onThrowException(GeneralException generalException, HttpServletRequest request) {
         ErrorReasonDTO errorReasonHttpStatus = generalException.getErrorReasonHttpStatus();

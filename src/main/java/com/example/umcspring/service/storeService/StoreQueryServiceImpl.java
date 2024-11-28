@@ -1,4 +1,4 @@
-package com.example.umcspring.service;
+package com.example.umcspring.service.storeService;
 
 import com.example.umcspring.domain.Store;
 import com.example.umcspring.repository.StoreRepository;

@@ -37,18 +37,6 @@ public class Store extends BaseEntity {
     @JoinColumn(name = "region_id")
     private Region region;
 
-    /*
-    private void validateName(String name) {
-        if (name == null || name.isEmpty()) {
-            throw new IllegalArgumentException("Name cannot be null or empty");
-        }
-
-        if (name.length() >10){
-            throw new IllegalArgumentException("Name cannot exceed 10 characters");
-        }
-    }
-     */
-
     @Override
     public String toString() {
         return "Store{" +
